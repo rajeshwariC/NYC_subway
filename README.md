@@ -64,7 +64,8 @@ ggplot(rain_data, aes(x=net_entries, fill=new_rain_var))+
   geom_vline(data=rain_data_mean, aes(xintercept=mean_rain, color=new_rain_var),
              linetype="dashed",size=1)
 
-#Linear REgression
+#Linear Regression
+
 subway$hour<-factor(subway$hour)
 subway$weekday.f<-factor(subway$weekday)
 
@@ -73,12 +74,17 @@ summary(model1)
 plot(model1)
 
 #Visualization
+
 qplot(ENTRIESn_hourly,data=subway,fill=I("skyblue"),xlim=c(0,10000),geom="density",main="Hourly entries",xlab="entries per turnstile")
+
 qplot(EXITSn_hourly,data=subway,fill=I("skyblue"),xlim=c(0,10000),geom="density",main="Hourly exits",xlab="exits per turnstile")
+
 subway$net_entries<-subway$ENTRIESn_hourly-subway$EXITSn_hourly
+
 qplot(net_entries,data=subway,fill=I("skyblue"),xlim=c(-7000,7000),geom="density",main="Net entries",xlab="Net entries per turnstile")
 
 library(ggplot2)
+
 ggplot(rain_data, aes(x=net_entries, fill=new_rain_var))+
   geom_histogram(position="dodge",alpha=1)+
   xlim(c(0,4000))+
